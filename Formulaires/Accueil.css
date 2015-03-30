@@ -1,0 +1,97 @@
+﻿body
+{
+    background-color: #d8f7e5;
+    margin: auto;
+    padding: 0;
+    min-height: 100%;
+    font-family: Arial;
+}
+
+header{
+    height: 220px;
+    position: relative;
+}
+
+header>img{
+    margin-left: 600px;
+
+}
+
+#User{
+    position: absolute;
+    right: 20px;
+    top: 20px;
+}
+
+#User>img{
+    width: 50px;
+}
+
+#User>ul{
+    background-color: #98c3c6;  
+    padding: 10px;
+    list-style-type:none;
+    display: none;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.4); 
+    font-size: 15px;
+}
+
+#User:hover ul{
+    display: block;
+    cursor: pointer;
+}
+
+li:hover{
+    color: white;
+}
+
+
+#Blabla
+{
+    position: absolute;
+    top: 250px;
+    left: 400px;
+}
+
+
+.Bloc
+{
+    height: 400px;
+    width: 200px;
+    display: inline-block;
+    margin: 10px;
+    background-color: #52dae4;
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.55);
+    -moz-transition-property: height, box-shadow;
+    -o-transition-property: height, box-shadow;
+    -webkit-transition-property: height, box-shadow;
+    transition-property: height, box-shadow;
+    -moz-transition-duration: 0.15s;
+    -o-transition-duration: 0.15s;
+    -webkit-transition-duration: 0.15s;
+    transition-duration: 0.15s;
+    text-decoration: none;
+}
+
+
+.Bloc:hover
+{
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.6);
+    height: 430px;
+}
+
+#Recap{
+    background-color: red;
+    
+}
+
+a>p{
+    text-align: center;
+    color: white;
+    text-shadow: 0px 2px 5px black;
+
+    font-size: 20px;
+
+    margin-top: 150px;
+
+}
