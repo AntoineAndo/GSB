@@ -15,13 +15,13 @@ if(!isset($_SESSION['login']))
                    exit('problème de connexion à la base');
            }
            
-    $requete= 'DELETE FROM lignefrais WHERE id = :id';
+    $requete= 'UPDATE fichefrais SET status = "En attente" WHERE id = :id';
     try
          {
              $req = $connect->prepare($requete);
              
              $req->execute(array(':id'=>$_POST['id']));
-             
+
              header('location:http://localhost/GSB/Formulaires/SaisirFrais.php');
          }    
          catch (PDOException $e)

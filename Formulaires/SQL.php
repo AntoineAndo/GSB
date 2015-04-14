@@ -1,6 +1,6 @@
 <?php
 $host = 'localhost';
-$base = 'test';
-$login = 'admin';
+$base = 'gsb';
+$login = 'root';
 $passwd = '';
 ?>

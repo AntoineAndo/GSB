@@ -43,7 +43,7 @@ else {
     <h1>Accueil visiteur de l'intranet GSB</h1>
 
     <div id="Blabla" style='left:560px;'>
-        <a href="SaisirFrais - NEW.php" style="background-color: #52dae4;" class="Bloc">
+        <a href="SaisirFrais.php" style="background-color: #52dae4;" class="Bloc">
             <p>Saisir Frais</p>
         </a>
         <a href="ConsultFrais.php" style="background-color: #24a7b0;" class="Bloc">

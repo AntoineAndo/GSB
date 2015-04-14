@@ -40,7 +40,7 @@ if (isset($_POST['Login']))
         // $Login = mysql_real_escape_string($Login);
         // $MotDePasse = mysql_real_escape_string($MotDePasse);
          // $MotDePasse = hashPassword($MotDePasse);
-         $requete = 'SELECT Poste,Nom,Prenom FROM utilisateurs WHERE Login like :pseudo AND MotDePasse like :mdp';
+         $requete = 'SELECT Poste,Nom,Prenom, id FROM utilisateurs WHERE Login like :pseudo AND MotDePasse like :mdp';
     
 		try
 		{
@@ -59,6 +59,7 @@ if (isset($_POST['Login']))
                         $_SESSION['Poste'] = $i[0];
                         $_SESSION['Nom'] = $i[1];
                         $_SESSION['Prenom'] = $i[2];
+                        $_SESSION['id'] = $i[3];
                     }
                     
                     if ($_SESSION['Poste'] == 'Employe'){
