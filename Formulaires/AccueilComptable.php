@@ -2,7 +2,7 @@
 session_start(); 
 if(!isset($_SESSION['login']))
     {
-    header('location: http://localhost/GSB/Appli/SeConnecter.php');
+    header('location: ../Appli/SeConnecter.php');
     }
     
 if( $_SESSION['Poste'] != 'Comptable' && $_SESSION['Poste'] == 'Admin')
@@ -24,26 +24,14 @@ else {
     <link href="CSS/Accueil.css" rel="stylesheet" />
 </head>
 <body>
-    <header>
-        <img src="http://localhost/GSB/Ressources/GSB.png" alt="Galaxy-Swiss Bourdin" />
-
-        <div id="User">
-            <?php
-            echo '<b>'.$_SESSION['Prenom'].' '.$_SESSION['Nom'].'</b>';
-            ?>
-            <img src="http://localhost/GSB/Ressources/Avatar.jpg" />
-            <ul>
-                <li>------------------</li>
-                <li><a href="http://localhost/GSB/Appli/Deconnexion.php">Déconnexion</a></li>
-            </ul>
-        </div>
-
-    </header>
+    <?php include_once("header.php") ?>
 
     <h1>Accueil comptable de l'intranet GSB</h1>
 
     <div id="Blabla" style='left:560px;'>
-		
+        <a href="ValidFrais.php" style="background-color: #52dae4;" class="Bloc">
+            <p>Valider frais</p>
+        </a>
     </div>
 </body>
 </html>

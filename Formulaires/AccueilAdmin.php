@@ -3,7 +3,7 @@ include('SQL.php');
 session_start(); 
 if(!isset($_SESSION['login']))
     {
-    header('location: http://localhost/GSB/Appli/SeConnecter.php');
+    header('location: ../Appli/SeConnecter.php');
     }
     
 if( $_SESSION['Poste'] != 'Admin' && $_SESSION['Poste'] == 'Employe')
@@ -50,81 +50,14 @@ else
     <link href="CSS/Accueil.css" rel="stylesheet" />
 </head>
 <body>
-     <header>
-        <img src="http://localhost/GSB/Ressources/GSB.png" alt="Galaxy-Swiss Bourdin" />
-
-        <div id="User">
-            <?php
-            echo '<b>'.$_SESSION['Prenom'].' '.$_SESSION['Nom'].'</b>';
-            ?>
-            <img src="http://localhost/GSB/Ressources/Avatar.jpg" />
-            <ul>
-                <li>------------------</li>
-                <li><a href="http://localhost/GSB/Appli/Deconnexion.php">Déconnexion</a></li>
-            </ul>
-        </div>
-    </header>
-    <div class="Navi" style="background-color: gray;">
-
-        <div class="BoutonConsulter" style="top: 200px; background-color: gray;" >
-            <a id="Outils">Consulter</a>
-        </div>
-        <h2>Consulter Fiche</h2>
-            <b>Frais</b>
-            
-                    <form method="POST" action="">
-                        Mois/Année <input type="text" name="Date">
-                        Prenom <input type="text" name="Prenom"><br>        
-                        Nom <input type="text" name="Nom"><br>        
-                        <input type="submit" value="Valider">        
-                    </form>
+    <?php include_once("header.php") ?>
+    <div id="Blabla" style='left:560px;'>
+        <a href="NouvelUser.php" style="background-color: #52dae4;" class="Bloc">
+            <p>Gestion des utilisateurs</p>
+        </a>
+        <a href="Archives.php" style="background-color: #24a7b0;" class="Bloc">
+            <p>Gestion des archives</p>
+        </a>
     </div>
-
-    <div class="Navi" style="background-color: rgb(75,148,186);">
-
-        <div class="BoutonConsulter" style="top: 300px; background-color: rgb(75,148,186);">
-            <a id="Consulter">Outils </a>
-        </div>
-        <h2>Compte utilisateur</h2>
-        <ul>
-            <li><b>Frais</b></li>
-            <ul>
-                <li><a href="ValidFrais.html">Enregistrer opération</a></li>
-            </ul>
-        </ul>
-    </div>
-    
-    <div class="Navi" style="background-color: rgb(73,152,134);">
-
-        <div class="BoutonConsulter" style="top: 400px; background-color: rgb(73,152,134);">
-            <a id="Consulter">Outils </a>
-        </div>
-        <h2>Gestion forfaits</h2>
-        <ul>
-            <li><b>Frais</b></li>
-            <ul>
-                <li><a href="ValidFrais.html">Enregistrer opération</a></li>
-            </ul>
-        </ul>
-    </div>
-             <table border='1' id="Recap">
-                 <caption><b><u> Fiches de frais non-validés </u></b></caption>
-                 <tr style='background-color:rgb(150,150,150);'>
-                     <th>Nom</th>
-                     <th>Prenom</th>
-                     <th>Date</th>
-                 </tr>
-     <?php        
-             foreach ($resultat as $i) 
-             {
-      echo '<tr>
-                <th>'.$i[0].'</th>
-                <th>'.$i[1].'</th>
-                <th>'.$i[2].'</th>
-           </tr>';
-             }
-?>
-                 
-            </table>
 </body>
 <?php } ?>

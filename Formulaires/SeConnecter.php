@@ -1,7 +1,7 @@
 <?php
 
 session_start(); 
-if(isset($_SESSION['login']))
+if(isset($_SESSION['login']))   
     {
     header('location: http://localhost/GSB/Formulaires/AccueilVisiteur.php');
     }
@@ -9,7 +9,7 @@ if(isset($_SESSION['login']))
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link href="SeConnecter.css" rel="stylesheet" />
+    <link href="./CSS/SeConnecter.css" rel="stylesheet" />
     <link href='http://fonts.googleapis.com/css?family=Luckiest+Guy' rel='stylesheet' type='text/css' />
     <title>Intranet du Laboratoire GSB</title>
 </head>
@@ -22,7 +22,7 @@ if(isset($_SESSION['login']))
         <h2><u>Veuillez entrer ci-dessous vos identifiants: </u></h2>
 
 
-        <form action="Connexion.php" method="post">
+        <form action="../Appli/Connexion.php" method="post">
             <u>Identification utilisateur :</u>
             <table>
                 <tbody>

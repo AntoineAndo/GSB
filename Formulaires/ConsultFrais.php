@@ -43,21 +43,9 @@ if (isset($_POST['mois']) || isset($_POST['annee']))
     <link href="CSS/Accueil.css" rel="stylesheet" />
 </head>
 <body>
-     <header>
-        <a href="AccueilVisiteur.php" id='BlocRetour'><img src='http://localhost/GSB/Ressources/fleche_retour.png'><b>Retourner à l'accueil</b></a>
-        <img src="http://localhost/GSB/Ressources/GSB.png" alt="Galaxy-Swiss Bourdin" />
 
-        <div id="User">
-            <?php
-            echo '<b>'.$_SESSION['Prenom'].' '.$_SESSION['Nom'].'</b>';
-            ?>
-            <img src="http://localhost/GSB/Ressources/Avatar.jpg" />
-            <ul>
-                <li>------------------</li>
-                <li><a href="http://localhost/GSB/Appli/Deconnexion.php">Déconnexion</a></li>
-            </ul>
-        </div>
-     </header>
+
+        <?php include_once("header.php") ?>
     
     <form method="POST" action="ConsultFrais.php" id="NouvelleLigne" style="margin-top: 50px;">
         <input type="text" name="mois" placeholder="Mois">

@@ -16,7 +16,7 @@ if(!isset($_SESSION['login']))
 			exit('problème de connexion à la base');
 		}
     $currentMonth = (new dateTime())->format('m');
-    $requete2 = 'SELECT id, mois, annee, status, idEmploye FROM fichefrais WHERE status = "En cours" ORDER BY id asc';
+    $requete2 = 'SELECT id, mois, annee, status, idEmploye FROM fichefrais WHERE status = 0 ORDER BY id asc';
 
     try
 		{
@@ -49,21 +49,7 @@ if(!isset($_SESSION['login']))
     </script>
 </head>
 <body>
-     <header style="margin-bottom: 50px;">
-        <a href="AccueilVisiteur.php" id='BlocRetour'><img src='http://localhost/GSB/Ressources/fleche_retour.png'><b>Retourner à l'accueil</b></a>
-        <img src="http://localhost/GSB/Ressources/GSB.png" alt="Galaxy-Swiss Bourdin" />
-
-        <div id="User">
-            <?php
-            echo '<b>'.$_SESSION['Prenom'].' '.$_SESSION['Nom'].'</b>';
-            ?>
-            <img src="http://localhost/GSB/Ressources/Avatar.jpg" />
-            <ul>
-                <li>------------------</li>
-                <li><a href="http://localhost/GSB/Appli/Deconnexion.php">Déconnexion</a></li>
-            </ul>
-        </div>
-    </header>    
+    <?php include_once("header.php") ?> 
 
 
 <?php 

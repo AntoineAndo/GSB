@@ -12,6 +12,6 @@ echo 'Session détruite<br>';
 
 echo 'Vous êtes déconnectés';
 
-header('location: http://localhost/GSB/Appli/SeConnecter.php');
+header('location: ../Formulaires/SeConnecter.php');
 
 ?>

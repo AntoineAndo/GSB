@@ -9,8 +9,7 @@ return $chaine;
 
 function hashPassword( $pwd )
 {
-    //return sha1('e*?g^*~Ga7' . $pwd . '9!cF;.!Y)?');
-	return $pwd;
+    return sha1('e*?g^*~Ga7' . $pwd . '9!cF;.!Y)?');
 }
 
 
@@ -18,7 +17,7 @@ function hashPassword( $pwd )
 if (isset($_POST['Login']))
 {
     $Login = (isset($_POST['Login']) && trim($_POST['Login']) != '')? Verif_magicquotes($_POST['Login']) : null;
-    $MotDePasse = (isset($_POST['MotDePasse']) && trim($_POST['MotDePasse']) != '')? Verif_magicquotes($_POST['MotDePasse']) : null;
+    $MotDePasse = (isset($_POST['MotDePasse']) && trim($_POST['MotDePasse']) != '')? hashPassword(Verif_magicquotes($_POST['MotDePasse'])) : null;
 
     if(isset($Login,$MotDePasse)) 
     {

@@ -1,152 +1,144 @@
-<?php
-session_start(); 
-if(!isset($_SESSION['login']))
-    {
-    header('location: http://localhost/GSB/Appli/SeConnecter.php');
-    }
-    
-if( $_SESSION['Poste'] == 'Admin')
-{
-    echo 'Vous n\'etes pas autorisés à accéder à cette page';
-    echo '<br><a href="AccueilAdmin.php">Accéder à l\'accueil Admin</a>';
-}
-else if($_SESSION['Poste'] == 'Employe')
-{
-    echo 'Vous n\'etes pas autorisés à accéder à cette page';
-    echo '<br><a href="AccueilVisiteur.php">Accéder à l\'accueil Employé</a>';  
-}    
-else {    
-?>
+    <?php
+    include('SQL.php');
+    session_start(); 
+    if(!isset($_SESSION['login']))
+        {
+        header('location: http://localhost/GSB/Appli/SeConnecter.php');
+        }
+       
+        try
+    		{
+    		   $connect = new PDO('mysql:host='.$host.';dbname='.$base, $login, $passwd);
+    		}
+        catch (PDOException $e)
+    		{
+    			echo $e;
+    			exit('problème de connexion à la base');
+    		}
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <link href="CSS/ValidFrais.css" rel="stylesheet" />
-    <link href="http://fonts.googleapis.com/css?family=Luckiest+Guy" rel="stylesheet" type="text/css" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Validation des frais - GSB</title>
-</head>
-<body>
-    <header>
-        <a href="Accueil.html">
-            <img src="GSB.png" alt="Logo GSB" />
-        </a>
-        <h1>Validation des frais</h1>
+        ?>
 
-        <div id="User">
-            <?php
-            echo '<b>'.$_SESSION['Prenom'].' '.$_SESSION['Nom'].'</b>';
+    <html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>FRAIS</title>
+        <link href="CSS/Accueil.css" rel="stylesheet" />
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+        <script>
+            $(function() {
+                $("#datepicker").datepicker();
+            });
+        </script>
+    </head>
+    <body>
+        
+        <?php include_once("header.php") ?> 
+
+            <?php      
+                $requete = 'SELECT * from utilisateurs';
+
+                $req_prep = $connect->prepare($requete);
+                $req_prep->execute();
+                $resultat = $req_prep->fetchAll(); 
             ?>
-            <img src="Avatar.jpg" />
-            <ul>
-                <li>------------------</li>
-                <li><a href="http://localhost/GSB/Appli/Deconnexion.php">Déconnexion</a></li>
-            </ul>
-        </div>
+            <form method="POST" action="">
+                <table border="1">
 
-    </header>
-    <div id="Navi">
+    <?php
+                foreach ($resultat as $i) 
+                    { 
+                        echo '<tr>';
+                            echo "<td><input type='radio' name='employe' value='$i[0]'></td><td>$i[1]</td><td>$i[2]</td>";
+                        echo '</tr>';
+                    }
 
-        <div id="BoutonOutils">
-            <a id="Outils">Consulter</a>
-        </div>
-        <h2>Outils</h2>
-        <ul>
-            <li><b>Frais</b></li>
-            <ul>
-                <li><a href="ValidFrais.html">Enregistrer opération</a></li>
-            </ul>
-        </ul>
-    </div>
-
-    <div id="Navi2">
-
-        <div id="BoutonConsulter">
-            <a id="Consulter">Outils </a>
-        </div>
-        <h2>Consulter une archive</h2>
-        <ul>
-            <li><b>Frais</b></li>
-            <ul>
-                <li><a href="ValidFrais.html">Enregistrer opération</a></li>
-            </ul>
-        </ul>
-    </div>
-    <form name="formValidFrais" method="post" action="enregValidFrais.php">
-        <div class="Blabla">
-            <h2>Validation des frais par visiteur</h2>
-
-            <label class="titre">Choisir le visiteur :</label>
-            <select name="lstVisiteur" class="zone">
-                <option value="a131">Villechalane</option>
-            </select>
-            <label class="titre">Mois :</label>
-            <input class="zone" type="text" name="dateValid" size="12" />
-            <p class="titre" />
-        </div>
-        <div class="Blabla">
-            <div>
-                <h2>Frais au forfait </h2>
-            </div>
-            <table border="1">
+    ?>
                 <tr>
-                    <th>Repas midi</th>
-                    <th>Nuitée </th>
-                    <th>Km </th>
-                    <th>Situation</th>
-                </tr>
-                <tr align="center">
-                    <td width="90">
-                        <input type="text" size="6" name="repas" /></td>
-                    <td width="90">
-                        <input type="text" size="6" name="nuitee" /></td>
-                    <td width="90">
-                        <input type="text" size="6" name="km" /></td>
-                    <td width="80">
-                        <select size="3" name="situ">
-                            <option value="E">Enregistré</option>
-                            <option value="V">Validé</option>
-                            <option value="R">Remboursé</option>
-                        </select></td>
+                    <input type="submit" value="Selectionner">
                 </tr>
             </table>
-        </div>
-        <div class="Blabla">
-            <h2>Hors forfait</h2>
-            <table border="1">
-                <tr>
-                    <th>Date</th>
-                    <th>Libellé </th>
-                    <th>Montant</th>
-                    <th>Situation</th>
-                </tr>
-                <tr align="center">
-                    <td width="100">
-                        <input type="text" size="12" name="hfDate1" /></td>
-                    <td width="220">
-                        <input type="text" size="30" name="hfLib1" /></td>
-                    <td width="90">
-                        <input type="text" size="10" name="hfMont1" /></td>
-                    <td width="80">
-                        <select size="3" name="hfSitu1">
-                            <option value="E">Enregistré</option>
-                            <option value="V">Validé</option>
-                            <option value="R">Remboursé</option>
-                        </select></td>
-                </tr>
-            </table>
-            <p></p>
-            <div class="titre">Nb Justificatifs</div>
-            <input type="text" class="zone" size="4" name="hcMontant" />
-            <p class="titre" />
-            <label class="titre">&nbsp;</label>
-            <input type="submit" value="Valider" class="Bouton" />
-            <input type="reset" class="Bouton Effacer" value="Effacer" />
-        </div>
-    </form>
+        </form>
+
+    <?php 
+            
+        if(isset($_POST["employe"]))
+        {
+       // $requete2 = 'SELECT * from fichefrais f JOIN lignefrais l on l.idFicheFrais = f.id WHERE f.idEmploye == ' . $_POST["employe"];
+        $requete2 = "SELECT mois, annee, idEmploye, status, Nom, Prenom, f.id from fichefrais f JOIN utilisateurs u ON u.id = f.idEmploye WHERE f.idEmploye = :employe AND status = 1 ORDER BY mois";
+        try
+            {
+                $req_prep = $connect->prepare($requete2);
+                $req_prep->bindParam(':employe', $_POST['employe']);
+                $req_prep->execute();
+                $resultat2 = $req_prep->fetchAll(); 
+            }
+        catch (PDOException $e)
+            {
+                $message = 'Problème dans la requête de sélection';
+                echo $message;
+            } 
+
+        foreach($resultat2 as $j)
+        {
+            echo "<div style='margin: 10px auto; border: solid 5px white; width: 400px; padding: 20px; background-color: rgb(139,171,210)'>";
+            echo "<h4>Fiche de frais de $j[5] $j[4] du mois de $j[0]/$j[1]</h4>"; 
+
+            $requete3 = "SELECT Type, Libelle, Date, Montant, idFicheFrais, id FROM lignefrais WHERE idFicheFrais = :idficheFrais";
+            try
+                {
+                    $req_prep = $connect->prepare($requete3);
+                    $req_prep->bindParam(':idficheFrais', $j[6]);
+                    $req_prep->execute();
+                    $resultat3 = $req_prep->fetchAll(); 
+                }
+            catch (PDOException $e)
+                {
+                    $message = 'Problème dans la requête de sélection';
+                    echo $message;
+                } 
+            echo "<table border='2' style='width: 400px;'>";
+            echo "<tr>
+                    <td>
+                        <b>Type</b>
+                    </td>
+                    <td>
+                        <b>Libelle</b>
+                    </td>
+                    <td>
+                        <b>Date</b>
+                    </td>
+                    <td>
+                        <b>Montant</b>
+                    </td>
+                </tr>";
+            foreach($resultat3 as $k)
+            {
+                echo "<tr>
+                        <td>$k[0]</td>
+                        <td>$k[1]</td>
+                        <td>$k[2]</td>
+                        <td>$k[3]</td>
+                    </tr>";
+            }
+            echo "</table>";
+
+                echo '<form method="POST" action="../Appli/ValiderFiche.php" style="margin: 10 0 -10 0 ">';
+                    echo "<input type='hidden' name='id' value=$k[4]>";
+                    echo "<input type='submit' value='Valider'>";
+                echo '</form>';
 
 
-</body>
-</html>
 
-<?php } ?>
+            echo "</div>";
+        }
 
+        }
+
+    ?>
+
+
+
+        
+    </body>
