@@ -29,28 +29,22 @@ if(isset($_SESSION['login']))
                     <tr>
                         <td><b>Nom d'utilisateur :</b></td>
                         <td>
-                            <input type="text" autocomplete="off" name="Login" maxlength="15" style="width: 350px" required="required"/></td>
+                            <input type="text" autocomplete="off" name="Login" maxlength="15" required="required"/></td>
                     </tr>
                     <tr>
                         <td><b>Mot de passe :</b></td>
                         <td>
-                            <input type="password" autocomplete="off" name="MotDePasse" maxlength="15" style="width: 350px" required="required"/></td>
-                    </tr>
-
-                    <tr>
-                        <td colspan="2" style="">
-                            <input type="submit" value="Valider" class="Bouton" />
-                            <input type="reset" class="Bouton Effacer" value="Effacer" />
-                        </td>
-                        <td></td>
+                            <input type="password" autocomplete="off" name="MotDePasse" maxlength="15" required="required"/></td>
                     </tr>
                 </tbody>
             </table>
+                            <input type="submit" value="Valider" class="Bouton" />
+                            <input type="reset" class="Bouton Effacer" value="Effacer" />
         </form>
     </div>
 
     <footer>
-        <u>Copyright © 2014 JAVA Tous droits réservés</u>
+        <u>Copyright © 2015 SeeSharp Tous droits réservés</u>
     </footer>
 </body>
 </html>

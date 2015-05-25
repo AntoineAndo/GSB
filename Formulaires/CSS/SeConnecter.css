@@ -1,28 +1,9 @@
-﻿body{
-    background-color: rgba(234, 246, 233, 0.63);
-    margin: auto;
-    padding: 0;
-    min-height: 100%;
-}
-
-h1
+﻿body
 {
-    display: inline-block;
-    position: absolute;
-    top: 20px;
-    left: 420px;
-    font-family: 'Luckiest Guy', cursive;
-    font-size: 48px;
-    color: rgb(83, 130, 165);
-    text-shadow: black 1px 1px, black -1px 1px, black -1px -1px, black 1px -1px;
-}
-
-h2{
-    display: inline-block;
-    font-family: 'Luckiest Guy', cursive;
-    font-size: 18px;
-    margin-top: 10px;
-    margin-left: 200px;
+background-color: rgba(234, 246, 233, 0.63);
+margin: auto;
+padding: 0;
+min-height: 100%;
 }
 
 header
@@ -35,63 +16,14 @@ header
     background-image: linear-gradient( rgb(200,200,200),  rgb(220,220,220) );
 }
 
-header img{
-    position: absolute;
-    top: 15px;
-    left: 15px;
-    box-shadow: 3px 3px 10px white, -3px 3px 10px white;
-    border-radius: 20px;
-    background-color:white;
-    width: 150px;
-    height: 125px;
-}
-
 #Blabla{
     position:relative;
     margin-top: 20px;
 }
 
-
-form{
-    padding: 30px;
-    padding-top: 100px;
-    margin: auto;
-    border: 3px black double;
-    width: 600px;
-    height: 300px;
-    font-family: Calibri, Arial, serif;
-    font-size: 18px;
-    background-image: linear-gradient( rgb(200,200,200),  rgb(220,220,220) );
-    box-shadow: 3px 3px 20px #534d4d, -3px 3px 20px #534d4d;
-
-}
-
-.Bouton{
-    background-image: linear-gradient(rgba(83,130,165, 0.7), rgb(83, 130, 165) ) ;
-    border-radius: 4px;
-    border: 1px black solid;
-    margin-top: 70px;
-    margin-left: 250px;
-    height: 40px;
-    width: 150px;
-    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.55);
-}
-
 .Bouton:hover{
-    
-    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.4);
-
+    background-image: linear-gradient(rgb(83, 130, 165), rgba(83,130,165, 0.7));
 }
-
-.Effacer{
-    margin-left: 10px;
-
-}
-
-    .Bouton:hover
-    {
-        background-image: linear-gradient(rgb(83, 130, 165), rgba(83,130,165, 0.7));
-    }
     
 
 footer{
@@ -100,4 +32,182 @@ footer{
     width: 300px;
     padding: 5px;
     font-size: small;
+}
+
+.Bouton:hover{
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.4);
+}
+
+
+
+@media screen and (min-width: 640px)
+{
+
+    h1
+    {
+        display: inline-block;
+        position: absolute;
+        top: 20px;
+        left: 28%;
+        font-family: 'Luckiest Guy', cursive;
+        font-size: 48px;
+        color: rgb(83, 130, 165);
+        text-shadow: black 1px 1px, black -1px 1px, black -1px -1px, black 1px -1px;
+    }
+
+    h2{
+        display: inline-block;
+        font-family: 'Luckiest Guy', cursive;
+        font-size: 18px;
+        margin-top: 10px;
+        margin-left: 200px;
+    }
+
+    header img{
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        border-radius: 20px;
+        width: 160px;
+        height: 125px;
+    }
+
+    form{
+        padding: 30px;
+        padding-top: 100px;
+        margin: auto;
+        border: 3px black double;
+        width: 600px;
+        height: 300px;
+        font-family: Calibri, Arial, serif;
+        font-size: 18px;
+        background-image: linear-gradient( rgb(200,200,200),  rgb(220,220,220) );
+        box-shadow: 3px 3px 20px #534d4d, -3px 3px 20px #534d4d;
+
+    }
+
+    input{
+        width: 350px;
+    }
+
+    .Bouton{
+        background-image: linear-gradient(rgba(83,130,165, 0.7), rgb(83, 130, 165) ) ;
+        border-radius: 4px;
+        border: 1px black solid;
+        margin-top: 70px;
+        margin-left: 250px;
+        height: 40px;
+        width: 150px;
+        box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.55);
+    }
+
+    .Effacer{
+        margin-left: 10px;
+
+    }
+}
+
+@media screen and (max-width: 1124px) and (min-width: 774px)
+{
+    h1{
+        margin-top: 0px;
+        margin-left: -30px;
+    }
+}
+@media screen and (max-width: 774px) and (min-width: 641px)
+{
+    h1{
+        margin-top: 35px;
+        font-size: 34px;
+    }
+}
+
+@media screen and (max-width: 640px)
+{
+    h1
+    {
+        display: inline-block;
+        display: none;
+        position: absolute;
+        top: 5px;
+        left: 5%;
+        font-family: 'Luckiest Guy', cursive;
+        font-size: 48px;
+        color: rgb(83, 130, 165);
+        text-shadow: black 1px 1px, black -1px 1px, black -1px -1px, black 1px -1px;
+    }
+
+    h2{
+        display: inline-block;
+        font-family: 'Luckiest Guy';
+        font-size: 20px;
+        margin-top: 10px;
+        margin-left: 12%;
+    }
+
+    h2>u{
+        text-decoration: none;
+    }
+
+    header
+    {
+        margin: auto;
+        height: 150px;
+        position: relative;
+        border-bottom: 15px solid rgb(83, 130, 165);
+        background-image: linear-gradient( rgb(200,200,200),  rgb(220,220,220) );
+    }
+
+    header img{
+        position: absolute;
+        top: 5px;
+        left: 35%;
+        border-radius: 20px;
+        width: 160px;
+        height: 125px;
+    }
+
+    form{
+        padding: 10px;
+        padding-top: 20px;
+        margin: auto;
+        border: 3px black double;
+        width: 95%;
+        font-family: Calibri, Arial, serif;
+        font-size: 18px;
+        background-image: linear-gradient( rgb(200,200,200),  rgb(220,220,220) );
+        box-shadow: 3px 3px 20px #534d4d, -3px 3px 20px #534d4d;
+
+    }   
+
+    table tr>td:nth-child(1)
+    {
+        width: 200px;
+    }
+
+    table tr>td:nth-child(2)
+    {
+        margin-right:10px;
+        width: 75%;
+
+    }
+
+    input{
+        height: 30px;
+        width: 100%;
+    }
+
+    .Bouton{
+        background-image: linear-gradient(rgba(83,130,165, 0.7), rgb(83, 130, 165) ) ;
+        border-radius: 4px;
+        border: 1px black solid;
+        margin-top: 5px;
+        margin-left: 1%;
+        height: 100px;
+        width: 98%;
+        box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.55);
+    }
+
+    .Effacer{
+    }
 }

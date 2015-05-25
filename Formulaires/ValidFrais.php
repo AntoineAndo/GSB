@@ -129,10 +129,13 @@
                     echo "<input type='submit' value='Valider'>";
                 echo '</form>';
 
-
-
             echo "</div>";
+
         }
+            if(!isset($j[0]))
+            {
+                echo "<h2>Aucune fiche de frais en attente";
+            }
 
         }
 
