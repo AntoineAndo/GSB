@@ -24,14 +24,13 @@
 
         <img src="http://localhost/GSB/Ressources/GSB.png" alt="Galaxy-Swiss Bourdin" />
 
+     </header>
         <div id="User">
             <?php
             echo '<b>'.$_SESSION['Prenom'].' '.$_SESSION['Nom'].'</b>';
             ?>
             <img src="http://localhost/GSB/Ressources/Avatar.jpg" />
             <ul>
-                <li>------------------</li>
                 <li><a href="../Appli/Deconnexion.php">Déconnexion</a></li>
             </ul>
         </div>
-     </header>
