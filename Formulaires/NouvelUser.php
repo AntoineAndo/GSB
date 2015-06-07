@@ -1,9 +1,9 @@
     <?php
     include('SQL.php');
     session_start(); 
-    if(!isset($_SESSION['login']))
+    if(!isset($_SESSION['login']) || $_SESSION['Poste'] != 'Admin')
         {
-        header('location: http://localhost/GSB/Appli/SeConnecter.php');
+        header('location: ../Appli/SeConnecter.php');
         }
         
     if( $_SESSION['Poste'] != 'Admin' && $_SESSION['Poste'] == 'Employe')
@@ -33,33 +33,66 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>FRAIS</title>
-        <link href="CSS/Accueil.css" rel="stylesheet" />
-        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-        <script>
-            $(function() {
-                $("#datepicker").datepicker();
-            });
-        </script>
+        <link href="CSS/Style.css" rel="stylesheet" />
+        <script src="./jquery.js" type="text/javascript" language="JavaScript"></script> 
+        <script src="./fonctions.js" type="text/javascript" language="JavaScript"></script> 
     </head>
     <body>
         <?php include_once("header.php") ?> 
-        <form action="CreationUser.php" method="post">
-            Nom:
-            <input type="text" name="Nom">
-            Prenom:
-            <input type="text" name="Prenom">
-            Poste:
-            <input type='text' name='Poste'>
-            Login:
-            <input type="text" name='Login'>
-            MDP:
-            <input type='text' name='MDP'>
-            <input value="Valider" type="submit" />
-        </form>
-
-<br><br><br><br><br><br>
+        <div class="UserButton">
+            <h3 id="123456Butt" class="toggleButt">Ajouter un nouvel utilisateur</h3>
+            <div id="123456" class="toggleZone" style="overflow: hidden; display: none;">
+            <form action="../Appli/CreationUser.php" method="post">
+                <table border="1"> 
+                    <tr>
+                        <th>
+                        Nom:
+                        </th>
+                        <th>
+                            <input type="text" name="Nom">
+                        </th>
+                </tr>
+                <tr>
+                <th>
+                Prenom:
+            </th>
+            <th>
+                <input type="text" name="Prenom">
+                </th>
+            </tr>
+            <tr>
+                <th>
+                Poste:
+            </th>
+            <th>
+                <input type='text' name='Poste'>
+                </th>
+                </tr>
+                <tr>
+                <th>
+                Login:
+                </th>
+                <th>
+                <input type="text" name='Login'>
+                </th>
+            </tr>
+            <tr>
+                <th>
+                MDP:
+                </th>
+                <th>
+                <input type='text' name='MDP'>
+                </th>
+                </tr>
+            <tr>
+                <td colspan="2">
+                    <input value="Valider" type="submit" style="width: 244px; height: 30px;"/>
+                </td>
+            </tr>
+            </table>
+            </form>
+        </div>
+    </div>  
 
         <?php include_once("header.php") ?> 
 
@@ -70,8 +103,15 @@
                 $req_prep->execute();
                 $resultat = $req_prep->fetchAll(); 
             ?>
-            <form method="POST" action="">
-                <table border="1">
+<div class="UserButton">
+    <h3 id="654321Butt" class="toggleButt">Modifier un utilisateur</h3>
+  <?php if(isset($_POST["employe"]))
+            echo '<div id="654321" class="toggleZone" style="overflow: hidden; display: block;">';
+        else
+            echo '<div id="654321" class="toggleZone" style="overflow: hidden; display: none;">';
+        ?>
+    <form method="POST" action="">
+        <table border="1">
 
     <?php
                 foreach ($resultat as $i) 
@@ -83,62 +123,99 @@
 
     ?>
                 <tr>
-                    <input type="submit" value="Selectionner">
+                    <td colspan="3">
+                    <input type="submit" value="Selectionner" style="width: 244px; height: 30px;">
+                </td>
                 </tr>
             </table>
         </form>
-
-
-
-
-
-
-
-
-
-
-
 
     <?php 
             
         if(isset($_POST["employe"]))
         {
-            $requete2 = 'SELECT id, Nom, Prenom, Poste, Login, MotDePasse FROM utilisateurs WHERE id = :id';
-   
-            $req_prep = $connect->prepare($requete);
-            $req_prep->bindParam(':id', $_POST['employe']);
-            $req_prep->execute();
-            $resultat2 = $req_prep->fetch(); 
+            $requete2 = "SELECT id, Nom, Prenom, Poste, Login, MotDePasse FROM utilisateurs WHERE id = " . $_POST["employe"];
+           // $requete2 = 'SELECT id, Nom, Prenom, Poste, Login, MotDePasse FROM utilisateurs WHERE id = :id';
+            $req = $connect->prepare($requete2);
+            //$req->bindParam(':id', $_POST['employe']);
+            $req->execute();
+            $resultat2 = $req->fetch(); 
 
 function hashPassword( $pwd )
 {
     return sha1('e*?g^*~Ga7' . $pwd . '9!cF;.!Y)?');
 }
 
-            echo "<form method='POST' action='../Appli/UpdateEmploye.php'> ";
-                echo "<input type='hidden' name='id' value='$resultat2[id]'>";
-                echo "<input required='required' type='text' name='Nom' value='$resultat2[Nom]'>";
-                echo "<input required='required' type='text' name='Prenom' value='$resultat2[Prenom]'>";
-                echo "<input required='required' type='text' name='Poste' value='$resultat2[Poste]'>";
-                echo "<input required='required' type='text' name='Login' value='$resultat2[Login]'>";
-                echo "<input required='required' type='text' name='MotDePasse' value=''>";
-                echo "<input type='submit' value='Mettre à jour'>";
-            echo "</form>";
+?>
 
+
+                <table border="1"> 
+                    <form action="../Appli/UpdateEmploye.php" method="post">
+                    <tr>
+                        <th>
+                            Nom:
+                        </th>
+                        <th>
+                            <?php echo "<input required='required' type='text' name='Nom' value='$resultat2[Nom]'>"; ?>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>
+                            Prenom:
+                        </th>
+                        <th>
+                            <?php echo "<input required='required' type='text' name='Prenom' value='$resultat2[Prenom]'>"; ?>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>
+                            Poste:
+                        </th>
+                        <th>
+                            <?php echo "<input required='required' type='text' name='Poste' value='$resultat2[Poste]'>"; ?>
+                        </th>
+                    </tr>
+                    <tr>
+                <th>
+                Login:
+                </th>
+                <th>
+                <?php echo "<input required='required' type='text' name='Login' value='$resultat2[Login]'>"; ?>
+                </th>
+            </tr>
+            <tr>
+                <th>
+                MDP:
+                </th>
+                <th>
+                <?php echo "<input required='required' type='text' name='MotDePasse' value=''>"; ?>
+                </th>
+                </tr>
+            <tr>
+                <td colspan="2">
+                    <?php echo "<input type='hidden' name='id' value='$resultat2[id]'>"; ?>
+                    <input value="Mettre à jour" type="submit" style="width: 244px; height: 30px;"/>
+                </td>
+            </tr>
+            </form>
+            <form action="../Appli/UpdateEmploye.php" method="post">
+                <tr>
+                    <td colspan="2">
+                        <?php echo "<input type='hidden' name='id' value='$resultat2[id]'>"; ?>
+                        <input value="Supprimer" type="submit" style="width: 244px; height: 30px;"/>
+                    </td>
+                </tr>
+            </form>
+            </table>
+<?php
         }
 
     ?>
+        </div>
+    </div>
+</body>
+<?php 
 
+}
 
-
-
-
-
-
-
-    </body>
-    <?php 
-
-    }
-
-    ?>
+?>

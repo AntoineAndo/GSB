@@ -1,5 +1,5 @@
 <?php 
 
-	header('location: http://localhost/GSB/Appli/SeConnecter.php');
+	header('location: ./Formulaires/SeConnecter.php');
 
 ?>

@@ -1,23 +1,24 @@
 <?php
 include('SQL.php');
 session_start(); 
-if(!isset($_SESSION['login']))
+if(!isset($_SESSION['login']) || $_SESSION['Poste'] != 'Employe' )
     {
-    header('location: http://localhost/GSB/Appli/SeConnecter.php');
+    header('location: ../Appli/SeConnecter.php');
     }
    
 if (isset($_POST['mois']) || isset($_POST['annee']))
 {
     try
-           {
-                   $connect = new PDO('mysql:host='.$host.';dbname='.$base, $login);
-           }
+        {
+           $connect = new PDO('mysql:host='.$host.';dbname='.$base, $login, $passwd);
+        }
     catch (PDOException $e)
-           {
-                   exit('problème de connexion à la base');
-           }
+        {
+            echo $e;
+            exit('problème de connexion à la base');
+        }
            
-    $requete = 'SELECT Type, Libelle, Date, Montant FROM lignefrais l JOIN fichefrais f ON l.idFicheFrais = f.id WHERE f.mois = :Mois AND f.annee = :Annee';
+    $requete = 'SELECT Type, Libelle, Date, Montant FROM lignefrais l JOIN fichefrais f ON l.idFicheFrais = f.id WHERE f.mois = :Mois AND f.annee = :Annee WHERE status < 3 AND status > 0';
     
     try
          {
@@ -40,12 +41,12 @@ if (isset($_POST['mois']) || isset($_POST['annee']))
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>FRAIS</title>
-    <link href="CSS/Accueil.css" rel="stylesheet" />
+    <link href="CSS/Style.css" rel="stylesheet" />
 </head>
 <body>
 
-
         <?php include_once("header.php") ?>
+<div class="main">
     
     <form method="POST" action="ConsultFrais.php" id="NouvelleLigne" style="margin-top: 50px;">
         <input type="text" name="mois" placeholder="Mois">
@@ -74,5 +75,5 @@ if (isset($_POST['mois']) || isset($_POST['annee']))
 
 ?>
 </table>
-    
+    <div class="main">
 </body>

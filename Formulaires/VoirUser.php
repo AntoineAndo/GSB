@@ -3,7 +3,7 @@ include('SQL.php');
 session_start(); 
 if(!isset($_SESSION['login']))
     {
-    header('location: http://localhost/GSB/Appli/SeConnecter.php');
+    header('location: ../Appli/SeConnecter.php');
     }
     
 if( $_SESSION['Poste'] != 'Admin' && $_SESSION['Poste'] == 'Employe')
@@ -52,16 +52,16 @@ else
 </head>
 <body>
      <header>
-        <img src="http://localhost/GSB/Ressources/GSB.png" alt="Galaxy-Swiss Bourdin" />
+        <img src="../Ressources/GSB.png" alt="Galaxy-Swiss Bourdin" />
 
         <div id="User">
             <?php
             echo '<b>'.$_SESSION['Prenom'].' '.$_SESSION['Nom'].'</b>';
             ?>
-            <img src="http://localhost/GSB/Ressources/Avatar.jpg" />
+            <img src="../Ressources/Avatar.jpg" />
             <ul>
                 <li>------------------</li>
-                <li><a href="http://localhost/GSB/Appli/Deconnexion.php">Déconnexion</a></li>
+                <li><a href="../Appli/Deconnexion.php">Déconnexion</a></li>
             </ul>
         </div>
     </header>       

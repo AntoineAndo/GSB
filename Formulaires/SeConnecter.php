@@ -1,10 +1,18 @@
 <?php
 
 session_start(); 
-if(isset($_SESSION['login']))   
+if(isset($_SESSION['login']) && $_SESSION['Poste']=='Employe' )   
     {
-    header('location: http://localhost/GSB/Formulaires/AccueilVisiteur.php');
+    header('location: ./AccueilVisiteur.php');
     }
+else if(isset($_SESSION['login']) && $_SESSION['Poste']=='Comptable' )   
+    {
+    header('location: ./AccueilComptable.php');
+    } 
+else if(isset($_SESSION['login']) && $_SESSION['Poste']=='Admin' )   
+    {
+    header('location: ./AccueilAdmin.php');
+    } 
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -15,7 +23,7 @@ if(isset($_SESSION['login']))
 </head>
 <body>
     <header>
-        <img src="http://localhost/GSB/Ressources/GSB.png" alt="Logo GSB" />
+        <img src="../Ressources/GSB.png" alt="Logo GSB" />
         <h1>Suivi du remboursement des frais</h1>
     </header>
     <div id="Blabla">
@@ -23,7 +31,6 @@ if(isset($_SESSION['login']))
 
 
         <form action="../Appli/Connexion.php" method="post">
-            <u>Identification utilisateur :</u>
             <table>
                 <tbody>
                     <tr>

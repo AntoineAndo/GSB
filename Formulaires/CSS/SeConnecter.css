@@ -40,7 +40,7 @@ footer{
 
 
 
-@media screen and (min-width: 640px)
+@media screen and (min-width: 480px)
 {
 
     h1
@@ -122,7 +122,7 @@ footer{
     }
 }
 
-@media screen and (max-width: 640px)
+@media screen and (max-width: 480px)
 {
     h1
     {
@@ -140,7 +140,7 @@ footer{
     h2{
         display: inline-block;
         font-family: 'Luckiest Guy';
-        font-size: 20px;
+        font-size: 30px;
         margin-top: 10px;
         margin-left: 12%;
     }
@@ -168,6 +168,7 @@ footer{
     }
 
     form{
+        height:350px;
         padding: 10px;
         padding-top: 20px;
         margin: auto;
@@ -192,8 +193,12 @@ footer{
 
     }
 
+    table tr td b{
+        font-size:24px;
+    }
+
     input{
-        height: 30px;
+        height: 50px;
         width: 100%;
     }
 
@@ -206,6 +211,8 @@ footer{
         height: 100px;
         width: 98%;
         box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.55);
+        font-size:36px;
+        font-weight:bold;
     }
 
     .Effacer{

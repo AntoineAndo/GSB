@@ -1,6 +1,6 @@
 <?php
-$host = 'localhost';
-$base = 'gsb';
-$login = 'root';
-$passwd = '';
+$host = 'MySQL-01';
+$base = 'cmsiepsi_gsbando';
+$login = 'cmsiepsi_gsbando';
+$passwd = 'P@$$w0rd';
 ?>

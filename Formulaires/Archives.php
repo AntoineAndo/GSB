@@ -6,7 +6,15 @@
         header('location: ../Appli/SeConnecter.php');
         }
        
-    include('functions.php');
+        try
+    		{
+    		   $connect = new PDO('mysql:host='.$host.';dbname='.$base, $login, $passwd);
+    		}
+        catch (PDOException $e)
+    		{
+    			echo $e;
+    			exit('problème de connexion à la base');
+    		}
 
         ?>
 
@@ -35,8 +43,8 @@
                 $req_prep->execute();
                 $resultat = $req_prep->fetchAll(); 
             ?>
-            <form method="GET" class="selectUser" action="">
-                <table border="1" style="width: 300px;">
+            <form method="GET" action="" class="selectUser">
+                <table border="1">
 
     <?php
                 foreach ($resultat as $i) 
@@ -49,7 +57,7 @@
     ?>
                 <tr>
                     <td colspan="3">
-                        <input type="submit" value="Selectionner" style="width: 290px;">
+                        <input type="submit" value="Selectionner"style="width: 290px;">
                     </td>
                 </tr>
             </table>
@@ -60,7 +68,7 @@
         if(isset($_GET["employe"]))
         {
        // $requete2 = 'SELECT * from fichefrais f JOIN lignefrais l on l.idFicheFrais = f.id WHERE f.idEmploye == ' . $_POST["employe"];
-        $requete2 = "SELECT mois, annee, idEmploye, status, Nom, Prenom, f.id from fichefrais f JOIN utilisateurs u ON u.id = f.idEmploye WHERE f.idEmploye = :employe AND status = 1 ORDER BY mois";
+        $requete2 = "SELECT mois, annee, idEmploye, status, Nom, Prenom, f.id from fichefrais f JOIN utilisateurs u ON u.id = f.idEmploye WHERE f.idEmploye = :employe AND status >= 2 ORDER BY mois";
         try
             {
                 $req_prep = $connect->prepare($requete2);
@@ -76,8 +84,18 @@
 
         foreach($resultat2 as $j)
         {
-            echo "<div style='margin: 10px auto; border: solid 5px white; width: 400px; padding: 20px; background-color: rgb(139,171,210)'>";
-            echo "<h4>Fiche de frais de $j[5] $j[4] du mois de $j[0]/$j[1]</h4>"; 
+            if ($j[3] == 2)
+            {
+                echo "<div style='margin: 10px auto; border: solid 5px white; width: 400px; padding: 20px; background-color: rgb(139,171,210)'>";
+                echo "<h4>Fiche de frais de $j[5] $j[4] du mois de $j[0]/$j[1]</h4>"; 
+            }
+            if ($j[3] == 3)
+            {
+                echo "<div style='margin: 10px auto; border: solid 5px white; width: 400px; padding: 20px; background-color: rgb(255,185,185)'>";
+                echo "<h4>Archive</h4>";
+                echo "<h4>Fiche de frais de $j[5] $j[4] du mois de $j[0]/$j[1]</h4>"; 
+            }
+
 
             $requete3 = "SELECT Type, Libelle, Date, Montant, idFicheFrais, id FROM lignefrais WHERE idFicheFrais = :idficheFrais";
             try
@@ -109,29 +127,47 @@
                 </tr>";
             foreach($resultat3 as $k)
             {
-            echo "<tr>
-                    <td>$k[0]</td>
-                    <td>$k[1]</td>
-                    <td>$k[2]</td>
-                    <td>$k[3]</td>
-                </tr>";
+              echo "<tr>
+                        <td>$k[0]</td>
+                        <td>$k[1]</td>
+                        <td>$k[2]</td>
+                        <td>$k[3]</td>
+                    </tr>";
             }
-            echo '</table>
-                <form method="POST" action="../Appli/ValiderFiche.php" style="margin: 10 0 -10 0 ">
-                    <input type="hidden" name="employe" value="'.$_GET['employe'].'">
-                    <input type="hidden" name="id" value="'.$k[4].'">
-                    <input type="submit" value="Valider">
-                </form>
-            </div>';
+            echo "</table>";
+
+                echo '<form method="POST" action="../Appli/ValiderFiche.php" style="margin: 10 0 -10 0 ">';
+                    echo "<input type='hidden' name='id' value=$k[4]>";
+
+            if ($j[3] == 2)
+            {
+                echo "<input type='hidden' name='status' value='".$_GET['employe']."'>";
+                echo "<input type='submit' value='Archiver'>";
+            }
+            if ($j[3] == 3)
+            {
+                echo "<input type='hidden' name='employe' value='".$_GET['employe']."'>";
+                echo "<input type='hidden' name='status' value='$j[3]'>";
+                echo "<input type='submit' value='Désarchiver'>";
+            }
+                echo '</form>';
+
+            echo "</div>";
+
+            if(!isset($j[0]))
+            {
+                echo "<h2>Aucune fiche de frais en attente";
+            }
+
+             }
+
+
 
         }
-        if(!isset($j[0]))
-        {
-            echo "<h2>Aucune fiche de frais en attente";
-        }
 
-    }
+    ?>
 
-?>
-    
-</body>
+
+
+        
+    </body>

@@ -29,10 +29,35 @@ else {
     <h1>Accueil comptable de l'intranet GSB</h1>
 
     <div id="Blabla" style='left:560px;'>
-        <a href="ValidFrais.php" style="background-color: #52dae4;" class="Bloc">
-            <p>Valider frais</p>
-        </a>
+        <div class="btn">
+            <a onclick="window.setTimeout(function(){location.href='ValidFrais.php';},200)" style="background-color: #52dae4;" class="Bloc">
+                <p>Valider frais</p>
+            </a>
+        </div>
     </div>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js" type="text/javascript"></script>
+    <script>
+        var tg, tgqe, x, y = null;
+        $("div.btn > a").on('click',function(e){
+            setTimeout(1000);
+            tg = $(this).parent();
+            if(tg.find('.qe').length == 0){
+                tg.prepend("<span class='qe'></span>");
+            }
+            tgqe = tg.find(".qe");
+            tgqe.removeClass("ani");
+            if(!tgqe.height() && !tgqe.width()){
+                var maxsz = Math.max(tg.outerWidth(), tg.outerHeight());
+                tgqe.css({height: maxsz, width: maxsz});
+            }
+            x = e.pageX - tg.offset().left - tgqe.width()/2;
+            y = e.pageY - tg.offset().top - tgqe.height()/2;
+            tgqe.css({top: y+'px', left: x+'px'}).addClass("ani");
+        })
+    </script>
+
+
+
 </body>
 </html>
 

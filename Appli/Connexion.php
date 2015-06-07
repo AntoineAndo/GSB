@@ -1,5 +1,5 @@
 <?php      
-include('sql.php');
+include('SQL.php');
 function Verif_magicquotes ($chaine) 
 {
 if (get_magic_quotes_gpc()) $chaine = stripslashes($chaine);
@@ -11,8 +11,6 @@ function hashPassword( $pwd )
 {
     return sha1('e*?g^*~Ga7' . $pwd . '9!cF;.!Y)?');
 }
-
-
 
 if (isset($_POST['Login']))
 {
@@ -62,15 +60,15 @@ if (isset($_POST['Login']))
                     }
                     
                     if ($_SESSION['Poste'] == 'Employe'){
-                        header('location: http://localhost/GSB/Formulaires/AccueilVisiteur.php');
+                        header('location: ../Formulaires/AccueilVisiteur.php');
                     }
                     else if ($_SESSION['Poste'] == 'Comptable')
                     {
-                        header('location: http://localhost/GSB/Formulaires/AccueilComptable.php');
+                        header('location: ../Formulaires/AccueilComptable.php');
                     }
                     else if ($_SESSION['Poste'] == 'Admin')
                     {
-                        header('location: http://localhost/GSB/Formulaires/AccueilAdmin.php');
+                        header('location: ../Formulaires/AccueilAdmin.php');
                     }
              }
              else if ($nb_result > 1)

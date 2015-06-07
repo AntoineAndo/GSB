@@ -29,13 +29,36 @@ else {
     <h1>Accueil visiteur de l'intranet GSB</h1>
 
     <div id="Blabla" style='left:560px;'>
-        <a href="SaisirFrais.php" style="background-color: #52dae4;" class="Bloc">
-            <p>Saisir Frais</p>
-        </a>
-        <a href="ConsultFrais.php" style="background-color: #24a7b0;" class="Bloc">
-            <p>Consulter Frais</p>
-        </a>
+        <div class="btn">
+            <a onclick="window.setTimeout(function(){location.href='SaisirFrais.php';},200)" style="background-color: #52dae4;" class="Bloc">
+                <p>Saisir Frais</p>
+            </a>
+        </div>
+        <div class="btn">
+            <a onclick="window.setTimeout(function(){location.href='ConsultFrais.php';},200)" style="background-color: #24a7b0;" class="Bloc">
+                <p>Consulter Frais</p>
+            </a>
+        </div>
     </div>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js" type="text/javascript"></script>
+    <script>
+        var tg, tgqe, x, y = null;
+        $("div.btn > a").on('click',function(e){
+            tg = $(this).parent();
+            if(tg.find('.qe').length == 0){
+                tg.prepend("<span class='qe'></span>");
+            }
+            tgqe = tg.find(".qe");
+            tgqe.removeClass("ani");
+            if(!tgqe.height() && !tgqe.width()){
+                var maxsz = Math.max(tg.outerWidth(), tg.outerHeight());
+                tgqe.css({height: maxsz, width: maxsz});
+            }
+            x = e.pageX - tg.offset().left - tgqe.width()/2;
+            y = e.pageY - tg.offset().top - tgqe.height()/2;
+            tgqe.css({top: y+'px', left: x+'px'}).addClass("ani");
+        })
+    </script>
 </body>
 </html>
 <?php

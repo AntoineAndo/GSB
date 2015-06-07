@@ -1,37 +1,46 @@
+aaaaaaaaaaaaaaaaaa
 <?php
 include('SQL.php');
 session_start(); 
+
 if(!isset($_SESSION['login']))
     {
-    header('location: http://localhost/GSB/Appli/SeConnecter.php');
+    header('location: ./SeConnecter.php');
     }
-   
-    try
-           {
-                   $connect = new PDO('mysql:host='.$host.';dbname='.$base, $login);
-           }
-    catch (PDOException $e)
-           {
-                   exit('problème de connexion à la base');
-           }
-           
-    $requete= 'UPDATE fichefrais SET status = status + 1 WHERE id = :id';
-    try
-         {
-             $req = $connect->prepare($requete);
-             
-             $req->execute(array(':id'=>$_POST['id']));
 
-              if($_SESSION['Poste'] == 'Employe')
-                header('location:http://localhost/GSB/Formulaires/SaisirFrais.php');
-              else if($_SESSION['Poste'] == 'Comptable')
-                header('location:http://localhost/GSB/Formulaires/ValidFrais.php');
-         }    
-         catch (PDOException $e)
-         {
-                $message = 'Problème dans la requête de sélection';
-                echo $message;
-         }
+    if($_POST['status'] < 3 || !isset($_POST['status']))
+        $requete= 'UPDATE fichefrais SET status = status + 1 WHERE id = :id';
+    else if($_POST['status'] == 3)
+        $requete= 'UPDATE fichefrais SET status = status - 1 WHERE id = :id';
+
+    try
+    {
+       $connect = new PDO('mysql:host='.$host.';dbname='.$base, $login, $passwd);
+    }
+    catch (PDOException $e)
+    {
+        echo $e;
+        exit('problème de connexion à la base');
+    }
+
+    try
+     {
+         $req = $connect->prepare($requete);
+         $req->execute(array(':id'=>$_POST['id']));
+
+          if($_SESSION['Poste'] == 'Employe')
+            header('location: ../Formulaires/SaisirFrais.php');
+          else if($_SESSION['Poste'] == 'Comptable')
+            header('location: ../Formulaires/ValidFrais.php');
+          else if($_SESSION['Poste'] == 'Admin')
+            $location = 'location: ../Formulaires/Archives.php?employe='.$_POST['employe'];
+            header($location);
+     }    
+     catch (PDOException $e)
+     {
+            $message = 'Problème dans la requête de sélection';
+            echo $message;
+     }
          
          
     ?>
