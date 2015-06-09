@@ -21,11 +21,12 @@
     <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>FRAIS</title>
+        <title>Gestion des archives</title>
         <link href="CSS/Style.css" rel="stylesheet" />
         <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
         <script src="//code.jquery.com/jquery-1.10.2.js"></script>
         <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+        <link rel="icon" href="../Ressources/favicon.ico" />
         <script>
             $(function() {
                 $("#datepicker").datepicker();
@@ -37,7 +38,7 @@
         <?php include_once("header.php") ?> 
 
             <?php      
-                $requete = 'SELECT * from utilisateurs';
+                $requete = 'SELECT * from utilisateurs WHERE Poste != "Rekt"';
 
                 $req_prep = $connect->prepare($requete);
                 $req_prep->execute();

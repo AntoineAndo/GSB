@@ -19,6 +19,7 @@ else if(isset($_SESSION['login']) && $_SESSION['Poste']=='Admin' )
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link href="./CSS/SeConnecter.css" rel="stylesheet" />
     <link href='http://fonts.googleapis.com/css?family=Luckiest+Guy' rel='stylesheet' type='text/css' />
+    <link rel="icon" href="../Ressources/favicon.ico" />
     <title>Intranet du Laboratoire GSB</title>
 </head>
 <body>
@@ -27,10 +28,16 @@ else if(isset($_SESSION['login']) && $_SESSION['Poste']=='Admin' )
         <h1>Suivi du remboursement des frais</h1>
     </header>
     <div id="Blabla">
-        <h2><u>Veuillez entrer ci-dessous vos identifiants: </u></h2>
+
 
 
         <form action="../Appli/Connexion.php" method="post">
+
+        <h2><u>Veuillez entrer ci-dessous vos identifiants: </u></h2>
+<b style="color:red;"><?php if(isset($_SESSION['message']))
+        echo $_SESSION['message'];
+    ?></b>
+
             <table>
                 <tbody>
                     <tr>

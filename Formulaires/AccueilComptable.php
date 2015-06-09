@@ -22,13 +22,14 @@ else {
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Accueil comptable de l'intranet</title>
     <link href="CSS/Accueil.css" rel="stylesheet" />
+    <link rel="icon" href="../Ressources/favicon.ico" />
 </head>
 <body>
     <?php include_once("header.php") ?>
 
     <h1>Accueil comptable de l'intranet GSB</h1>
 
-    <div id="Blabla" style='left:560px;'>
+    <div id="Blabla" style='margin:auto;'>
         <div class="btn">
             <a onclick="window.setTimeout(function(){location.href='ValidFrais.php';},200)" style="background-color: #52dae4;" class="Bloc">
                 <p>Valider frais</p>

@@ -24,12 +24,13 @@ else
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Accueil administrateur de l'intranet</title>
     <link href="CSS/Accueil.css" rel="stylesheet" />
+    <link rel="icon" href="../Ressources/favicon.ico" />
 </head>
 <body>
     <?php include_once("header.php") ?>
 
     <h1>Accueil administrateur de l'intranet GSB</h1>
-    <div id="Blabla" style='left:560px;'>
+    <div id="Blabla" style='margin:auto;'>
         <div class="btn">
             <a onclick="window.setTimeout(function(){location.href='NouvelUser.php';},200)" style="background-color: #24a7b0;" class="Bloc">
                 <p>Gestion des utilisateurs</p>

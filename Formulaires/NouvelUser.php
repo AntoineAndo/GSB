@@ -3,7 +3,7 @@
     session_start(); 
     if(!isset($_SESSION['login']) || $_SESSION['Poste'] != 'Admin')
         {
-        header('location: ../Appli/SeConnecter.php');
+        header('location: ../Formulaires/SeConnecter.php');
         }
         
     if( $_SESSION['Poste'] != 'Admin' && $_SESSION['Poste'] == 'Employe')
@@ -32,10 +32,11 @@
     <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>FRAIS</title>
+        <title>Gestion des utilisateurs</title>
         <link href="CSS/Style.css" rel="stylesheet" />
         <script src="./jquery.js" type="text/javascript" language="JavaScript"></script> 
         <script src="./fonctions.js" type="text/javascript" language="JavaScript"></script> 
+        <link rel="icon" href="../Ressources/favicon.ico" />
     </head>
     <body>
         <?php include_once("header.php") ?> 
@@ -49,7 +50,7 @@
                         Nom:
                         </th>
                         <th>
-                            <input type="text" name="Nom">
+                            <input type="text" name="Nom" required>
                         </th>
                 </tr>
                 <tr>
@@ -57,7 +58,7 @@
                 Prenom:
             </th>
             <th>
-                <input type="text" name="Prenom">
+                <input type="text" name="Prenom" required>
                 </th>
             </tr>
             <tr>
@@ -65,15 +66,20 @@
                 Poste:
             </th>
             <th>
-                <input type='text' name='Poste'>
+                <select name="Poste" style="width: 173px;" required>
+                  <option selected></option>
+                  <option value="Employe">Employé</option> 
+                  <option value="Comptable" >Comptable</option>
+                  <option value="Admin">Administrateur</option>
+                </select>
                 </th>
-                </tr>
-                <tr>
+            </tr>
+            <tr>
                 <th>
-                Login:
+                    Login:
                 </th>
                 <th>
-                <input type="text" name='Login'>
+                    <input type="text" name='Login' required>
                 </th>
             </tr>
             <tr>
@@ -81,7 +87,7 @@
                 MDP:
                 </th>
                 <th>
-                <input type='text' name='MDP'>
+                <input type='text' name='MDP' required>
                 </th>
                 </tr>
             <tr>
@@ -97,7 +103,7 @@
         <?php include_once("header.php") ?> 
 
             <?php      
-                $requete = 'SELECT * from utilisateurs';
+                $requete = 'SELECT * from utilisateurs WHERE Poste != "Rekt"';
 
                 $req_prep = $connect->prepare($requete);
                 $req_prep->execute();
@@ -134,11 +140,11 @@
             
         if(isset($_POST["employe"]))
         {
-            $requete2 = "SELECT id, Nom, Prenom, Poste, Login, MotDePasse FROM utilisateurs WHERE id = " . $_POST["employe"];
+            $requete2 = "SELECT id, Nom, Prenom, Poste, Login, MotDePasse FROM utilisateurs WHERE id = :id ";
            // $requete2 = 'SELECT id, Nom, Prenom, Poste, Login, MotDePasse FROM utilisateurs WHERE id = :id';
             $req = $connect->prepare($requete2);
             //$req->bindParam(':id', $_POST['employe']);
-            $req->execute();
+            $req->execute(array('id'=>$_POST['employe']));
             $resultat2 = $req->fetch(); 
 
 function hashPassword( $pwd )

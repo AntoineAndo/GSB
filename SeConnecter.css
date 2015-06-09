@@ -40,7 +40,7 @@ footer{
 
 
 
-@media screen and (min-width: 641px)
+@media screen and (min-width: 480px)
 {
 
     h1
@@ -60,8 +60,7 @@ footer{
         font-family: 'Luckiest Guy', cursive;
         font-size: 18px;
         margin-top: 10px;
-        margin-left: 10px;
-        margin-bottom: 60px;
+        margin-left: 200px;
     }
 
     header img{
@@ -75,6 +74,7 @@ footer{
 
     form{
         padding: 30px;
+        padding-top: 100px;
         margin: auto;
         border: 3px black double;
         width: 600px;
@@ -122,7 +122,7 @@ footer{
     }
 }
 
-@media screen and (max-width: 640px)
+@media screen and (max-width: 480px)
 {
     h1
     {

@@ -40,8 +40,9 @@ if (isset($_POST['mois']) || isset($_POST['annee']))
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>FRAIS</title>
+    <title>Consultation des frais</title>
     <link href="CSS/Style.css" rel="stylesheet" />
+    <link rel="icon" href="../Ressources/favicon.ico" />
 </head>
 <body>
 

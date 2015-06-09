@@ -1,4 +1,5 @@
-<?php      
+<?php     
+session_start();
 include('SQL.php');
 function Verif_magicquotes ($chaine) 
 {
@@ -11,7 +12,6 @@ function hashPassword( $pwd )
 {
     return sha1('e*?g^*~Ga7' . $pwd . '9!cF;.!Y)?');
 }
-
 if (isset($_POST['Login']))
 {
     $Login = (isset($_POST['Login']) && trim($_POST['Login']) != '')? Verif_magicquotes($_POST['Login']) : null;
@@ -27,17 +27,17 @@ if (isset($_POST['Login']))
         
           try
                 {
-                        $connect = new PDO('mysql:host='.$host.';dbname='.$base, $login, $passwd, $pdo_options);
+                    $connect = new PDO('mysql:host='.$host.';dbname='.$base, $login, $passwd, $pdo_options);
                 }
                 catch (PDOException $e)
                 {
-                        exit('problème de connexion à la base');
+                    exit('problème de connexion à la base');
                 }
         
         // $Login = mysql_real_escape_string($Login);
         // $MotDePasse = mysql_real_escape_string($MotDePasse);
          // $MotDePasse = hashPassword($MotDePasse);
-         $requete = 'SELECT Poste,Nom,Prenom, id FROM utilisateurs WHERE Login like :pseudo AND MotDePasse like :mdp';
+         $requete = 'SELECT Poste,Nom,Prenom, id FROM utilisateurs WHERE Login like :pseudo AND MotDePasse like :mdp AND Poste != "Rekt"';
     
 		try
 		{
@@ -58,6 +58,8 @@ if (isset($_POST['Login']))
                         $_SESSION['Prenom'] = $i[2];
                         $_SESSION['id'] = $i[3];
                     }
+
+                    $_SESSION['message'] = "";
                     
                     if ($_SESSION['Poste'] == 'Employe'){
                         header('location: ../Formulaires/AccueilVisiteur.php');
@@ -78,7 +80,10 @@ if (isset($_POST['Login']))
              }
              else
              {
-                 $message = 'Le pseudo ou le mot de passe sont incorrect';
+                
+                 $_SESSION['message'] = 'Le pseudo ou le mot de passe sont incorrect';
+
+                 header('location: ../Formulaires/SeConnecter.php');
                  echo $message;
              }
          }    

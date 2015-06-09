@@ -13,9 +13,10 @@
     <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>FRAIS</title>
+        <title>Validation des frais</title>
         <link href="CSS/Style.css" rel="stylesheet" />
         <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+        <link rel="icon" href="../Ressources/favicon.ico" />
         <script src="//code.jquery.com/jquery-1.10.2.js"></script>
         <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
         <script>
@@ -29,26 +30,38 @@
         <?php include_once("header.php") ?> 
 
             <?php      
-                $requete = 'SELECT * from utilisateurs';
+                $requete = 'SELECT u.id, u.Nom, u.Prenom, COUNT(f.status) AS COUNT FROM fichefrais f JOIN utilisateurs u ON f.idEmploye = u.id WHERE f.status = 1 AND Poste != "Rekt" GROUP BY u.id ORDER BY COUNT DESC, u.NOM ASC';
 
                 $req_prep = $connect->prepare($requete);
                 $req_prep->execute();
-                $resultat = $req_prep->fetchAll(); 
+                $users = $req_prep->fetchAll(); 
+
+                if($users == array())
+                {
+                    echo '<h2>Aucune fiche en attente</h2>';
+                }
+                else
+                {
+                
             ?>
+
+
+
+
             <form method="GET" class="selectUser" action="">
                 <table border="1" style="width: 300px;">
 
     <?php
-                foreach ($resultat as $i) 
+                foreach ($users as $i) 
                     { 
                         echo '<tr>';
-                            echo "<td><input type='radio' name='employe' value='$i[0]'></td><td>$i[1]</td><td>$i[2]</td>";
+                            echo "<td><input type='radio' name='employe' value='$i[0]'></td><td>$i[1]</td><td>$i[2]</td><td><b>$i[3] fiche(s) des frais en attente</b></td>";
                         echo '</tr>';
                     }
 
     ?>
                 <tr>
-                    <td colspan="3">
+                    <td colspan="4">
                         <input type="submit" value="Selectionner" style="width: 290px;">
                     </td>
                 </tr>
@@ -56,6 +69,7 @@
         </form>
 
     <?php 
+}
             
         if(isset($_GET["employe"]))
         {
@@ -120,7 +134,8 @@
                 <form method="POST" action="../Appli/ValiderFiche.php" style="margin: 10 0 -10 0 ">
                     <input type="hidden" name="employe" value="'.$_GET['employe'].'">
                     <input type="hidden" name="id" value="'.$k[4].'">
-                    <input type="submit" value="Valider">
+                    <input type="submit" value="Valider" name="submit">
+                    <input type="submit" value="Refuser" name="submit">
                 </form>
             </div>';
 

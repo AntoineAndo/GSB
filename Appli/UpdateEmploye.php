@@ -23,7 +23,8 @@ if(!isset($_SESSION['login']))
 
       if (!isset($_POST['Nom']) || !isset($_POST['Prenom']) || !isset($_POST['Poste']) || !isset($_POST['Login']) || !isset($_POST['MotDePasse']))
       {
-        $requete = 'DELETE FROM utilisateurs WHERE id = :id';
+        mysql_query("SET NAMES UTF8");
+        $requete = 'UPDATE utilisateurs SET Poste = "Rekt" WHERE id = :id';
         $req_prep = $connect->prepare($requete);
         $req_prep->execute(array('id'=>$_POST['id']));
         header('location: ../Formulaires/NouvelUser.php');

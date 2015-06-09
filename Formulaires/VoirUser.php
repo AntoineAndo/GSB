@@ -47,6 +47,7 @@ else
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="icon" href="../Ressources/favicon.ico" />
     <title>Consulter Frais</title>
     <link href="CSS/Accueil.css" rel="stylesheet" />
 </head>
